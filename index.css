@@ -1,8 +1,50 @@
+html{
+    display: flexbox;
+    height: 100%;
+}
+
 body {
     display:flexbox;
+    
+    height: 100%;
 }
 
 #pageTitle {
     display: flexbox;
-    justify-content: center;
+    text-align: center;
+    
 }
+
+#navBar{
+    display: flexbox;
+    text-align: end;
+    margin-right: 1em;
+}
+
+#formCmd{
+    display: flexbox;
+    text-align: center; 
+}
+
+#formSub{
+    display: flexbox;
+    text-align: center;  
+}
+
+#table{
+    display: flexbox;
+    align-self: center; 
+}
+
+#info {
+    display: flexbox;
+    text-align: center; 
+}
+
+#footer {
+    display: flexbox;
+    background-color: cornflowerblue;
+    justify-content: flex-end;
+    height:2em;
+}
+

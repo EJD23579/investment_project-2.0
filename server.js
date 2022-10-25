@@ -23,7 +23,7 @@ async function retrieveBalanceSheet(req,res){
   balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
   balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
 
-
+//Buffett Logic and scoring to be included
 
   cash2021 = balanceSheet2021.cash
   shortTermInv2021 = balanceSheet2021.shortTermInvestments

@@ -10,19 +10,25 @@ let result;
 async function details(req,res){
   let symbol = 'AAPL';
   result = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
-  resultString = JSON.stringify(result)
-  //Object.entries or Object.key
-  outerArray = Object.entries(result)
+ 
+  result2021 = result.balanceSheetHistory.balanceSheetStatements.at(0)
   
-  
-  
+  cash2021 = result2021.cash
+
+ 
+ 
   Object.keys(result).forEach(function (key){
     console.log(result[key])
+
+    
   })
 
-
-console.log(outerArray)
-
+console.log("------START--------")
+// BELOW
+console.log(result2021)
+// ABOVE
+console.log(cash2021)
+console.log("------END--------")
 
 
 

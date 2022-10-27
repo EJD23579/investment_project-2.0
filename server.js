@@ -1,11 +1,9 @@
 
 //------- Requirements START ----------------
 
-const { json } = require('express');
+const { json, response } = require('express');
 const express = require('express');
 const { rows } = require('pg/lib/defaults');
-const app = express()
-const port = 3000
 const yahooFinance = require('yahoo-finance2').default
 
 //------- Requirements END ----------------
@@ -13,6 +11,12 @@ const yahooFinance = require('yahoo-finance2').default
 let balanceSheet;
 let cashflow;
 let incomeStatement;
+const app = express()
+const port = 3000
+
+
+
+
 
 // ---------- Retrieving values from API START --------------
 async function retrieveBalanceSheet(req,res){
@@ -249,104 +253,106 @@ console.log("------END--------")
 
 
   // -------------- Most recent statement variables ----------------
-      totalRevenue2021 = cashflow2021.totalRevenue
-      costOfRevenue2021 = cashflow2021.costOfRevenue
-      grossProfit2021 = cashflow2021.grossProfit
-      researchDevelopment2021 = cashflow2021.researchDevelopment
-      sellingGeneralAdministrative2021 = cashflow2021.sellingGeneralAdministrative
-      nonRecurring2021 = cashflow2021.nonRecurring
-      otherOperatingExpenses2021 = cashflow2021.otherOperatingExpenses
-      totalOperatingExpenses2021 = cashflow2021.totalOperatingExpenses
-      operatingIncome2021 = cashflow2021.operatingIncome
-      totalOtherIncomeExpenseNet2021 = cashflow2021.totalOtherIncomeExpenseNet
-      ebit2021 = cashflow2021.ebit
-      interestExpense2021 = cashflow2021.interestExpense
-      incomeBeforeTax2021 = cashflow2021.incomeBeforeTax
-      incomeTaxExpense2021 = cashflow2021.incomeTaxExpense
-      minorityInterest2021 = cashflow2021.minorityInterest
-      netIncomeFromContinuingOps2021 = cashflow2021.netIncomeFromContinuingOps
-      discontinuedOperations2021 = cashflow2021.discontinuedOperations
-      extraordinaryItems2021 = cashflow2021.extraordinaryItems
-      effectOfAccountingCharges2021 = cashflow2021.effectOfAccountingCharges
-      otherItems2021 = cashflow2021.otherItems
-      netIncome2021 = cashflow2021.netIncome
-      netIncomeApplicabletoCommonShares = cashflow2021.netIncomeApplicabletoCommonShares
+      totalRevenue2021 = incomeStatement2021.totalRevenue
+      costOfRevenue2021 = incomeStatement2021.costOfRevenue
+      grossProfit2021 = incomeStatement2021.grossProfit
+      researchDevelopment2021 = incomeStatement2021.researchDevelopment
+      sellingGeneralAdministrative2021 = incomeStatement2021.sellingGeneralAdministrative
+      nonRecurring2021 = incomeStatement2021.nonRecurring
+      otherOperatingExpenses2021 = incomeStatement2021.otherOperatingExpenses
+      totalOperatingExpenses2021 = incomeStatement2021.totalOperatingExpenses
+      operatingIncome2021 = incomeStatement2021.operatingIncome
+      totalOtherIncomeExpenseNet2021 = incomeStatement2021.totalOtherIncomeExpenseNet
+      ebit2021 = incomeStatement2021.ebit
+      interestExpense2021 = incomeStatement2021.interestExpense
+      incomeBeforeTax2021 = incomeStatement2021.incomeBeforeTax
+      incomeTaxExpense2021 = incomeStatement2021.incomeTaxExpense
+      minorityInterest2021 = incomeStatement2021.minorityInterest
+      netIncomeFromContinuingOps2021 = incomeStatement2021.netIncomeFromContinuingOps
+      discontinuedOperations2021 = incomeStatement2021.discontinuedOperations
+      extraordinaryItems2021 = incomeStatement2021.extraordinaryItems
+      effectOfAccountingCharges2021 = incomeStatement2021.effectOfAccountingCharges
+      otherItems2021 = incomeStatement2021.otherItems
+      netIncome2021 = incomeStatement2021.netIncome
+      netIncomeApplicabletoCommonShares = incomeStatement2021.netIncomeApplicabletoCommonShares
       //------------- Variables +1 year -----------------------------
-      totalRevenue2020 = cashflow2020.totalRevenue
-      costOfRevenue2020 = cashflow2020.costOfRevenue
-      grossProfit2020 = cashflow2020.grossProfit
-      researchDevelopment2020 = cashflow2020.researchDevelopment
-      sellingGeneralAdministrative2020 = cashflow2020.sellingGeneralAdministrative
-      nonRecurring2020 = cashflow2020.nonRecurring
-      otherOperatingExpenses2020 = cashflow2020.otherOperatingExpenses
-      totalOperatingExpenses2020 = cashflow2020.totalOperatingExpenses
-      operatingIncome2020 = cashflow2020.operatingIncome
-      totalOtherIncomeExpenseNet2020 = cashflow2020.totalOtherIncomeExpenseNet
-      ebit2020 = cashflow2020.ebit
-      interestExpense2020 = cashflow2020.interestExpense
-      incomeBeforeTax2021 = cashflow2020.incomeBeforeTax
-      incomeTaxExpense2020 = cashflow2020.incomeTaxExpense
-      minorityInterest2020 = cashflow2021.minorityInterest
-      netIncomeFromContinuingOps2020 = cashflow2020.netIncomeFromContinuingOps
-      discontinuedOperations2020 = cashflow2020.discontinuedOperations
-      extraordinaryItems2020 = cashflow2020.extraordinaryItems
-      effectOfAccountingCharges2020 = cashflow2020.effectOfAccountingCharges
-      otherItems2020 = cashflow2020.otherItems
-      netIncome2020 = cashflow2020.netIncome
-      netIncomeApplicabletoCommonShares2020 = cashflow20.netIncomeApplicabletoCommonShares
+      totalRevenue2020 = incomeStatement2020.totalRevenue
+      costOfRevenue2020 = incomeStatement2020.costOfRevenue
+      grossProfit2020 = incomeStatement2020.grossProfit
+      researchDevelopment2020 = incomeStatement2020.researchDevelopment
+      sellingGeneralAdministrative2020 = incomeStatement2020.sellingGeneralAdministrative
+      nonRecurring2020 = incomeStatement2020.nonRecurring
+      otherOperatingExpenses2020 = incomeStatement2020.otherOperatingExpenses
+      totalOperatingExpenses2020 = incomeStatement2020.totalOperatingExpenses
+      operatingIncome2020 = incomeStatement2020.operatingIncome
+      totalOtherIncomeExpenseNet2020 = incomeStatement2020.totalOtherIncomeExpenseNet
+      ebit2020 = incomeStatement2020.ebit
+      interestExpense2020 = incomeStatement2020.interestExpense
+      incomeBeforeTax2021 = incomeStatement2020.incomeBeforeTax
+      incomeTaxExpense2020 = incomeStatement2020.incomeTaxExpense
+      minorityInterest2020 = incomeStatement2021.minorityInterest
+      netIncomeFromContinuingOps2020 = incomeStatement2020.netIncomeFromContinuingOps
+      discontinuedOperations2020 = incomeStatement2020.discontinuedOperations
+      extraordinaryItems2020 = incomeStatement2020.extraordinaryItems
+      effectOfAccountingCharges2020 = incomeStatement2020.effectOfAccountingCharges
+      otherItems2020 = incomeStatement2020.otherItems
+      netIncome2020 = incomeStatement2020.netIncome
+      netIncomeApplicabletoCommonShares2020 = incomeStatement2020.netIncomeApplicabletoCommonShares
       //------------- Variables +2 year -----------------------------
-      totalRevenue2019 = cashflow2019.totalRevenue
-      costOfRevenue2019 = cashflow2019.costOfRevenue
-      grossProfit2019 = cashflow2019.grossProfit
-      researchDevelopment2019 = cashflow2019.researchDevelopment
-      sellingGeneralAdministrative2019 = cashflow2019.sellingGeneralAdministrative
-      nonRecurring2019 = cashflow2019.nonRecurring
-      otherOperatingExpenses2019 = cashflow2019.otherOperatingExpenses
-      totalOperatingExpenses2019 = cashflow2019.totalOperatingExpenses
-      operatingIncome2019 = cashflow2019.operatingIncome
-      totalOtherIncomeExpenseNet2019 = cashflow2019.totalOtherIncomeExpenseNet
-      ebit2019 = cashflow2019.ebit
-      interestExpense2019 = cashflow2019.interestExpense
-      incomeBeforeTax2019 = cashflow2019.incomeBeforeTax
-      incomeTaxExpense2019 = cashflow2019.incomeTaxExpense
-      minorityInterest2019 = cashflow2019.minorityInterest
-      netIncomeFromContinuingOps2019 = cashflow2019.netIncomeFromContinuingOps
-      discontinuedOperations2019 = cashflow2019.discontinuedOperations
-      extraordinaryItems2019 = cashflow2019.extraordinaryItems
-      effectOfAccountingCharges2019 = cashflow2019.effectOfAccountingCharges
-      otherItems2019 = cashflow2019.otherItems
-      netIncome2019 = cashflow2019.netIncome
-      netIncomeApplicabletoCommonShares2019 = cashflow2019.netIncomeApplicabletoCommonShares
+      totalRevenue2019 = incomeStatement2019.totalRevenue
+      costOfRevenue2019 = incomeStatement2019.costOfRevenue
+      grossProfit2019 = incomeStatement2019.grossProfit
+      researchDevelopment2019 = incomeStatement2019.researchDevelopment
+      sellingGeneralAdministrative2019 = incomeStatement2019.sellingGeneralAdministrative
+      nonRecurring2019 = incomeStatement2019.nonRecurring
+      otherOperatingExpenses2019 = incomeStatement2019.otherOperatingExpenses
+      totalOperatingExpenses2019 = incomeStatement2019.totalOperatingExpenses
+      operatingIncome2019 = incomeStatement2019.operatingIncome
+      totalOtherIncomeExpenseNet2019 = incomeStatement2019.totalOtherIncomeExpenseNet
+      ebit2019 = incomeStatement2019.ebit
+      interestExpense2019 = incomeStatement2019.interestExpense
+      incomeBeforeTax2019 = incomeStatement2019.incomeBeforeTax
+      incomeTaxExpense2019 = incomeStatement2019.incomeTaxExpense
+      minorityInterest2019 = incomeStatement2019.minorityInterest
+      netIncomeFromContinuingOps2019 = incomeStatement2019.netIncomeFromContinuingOps
+      discontinuedOperations2019 = incomeStatement2019.discontinuedOperations
+      extraordinaryItems2019 = incomeStatement2019.extraordinaryItems
+      effectOfAccountingCharges2019 = incomeStatement2019.effectOfAccountingCharges
+      otherItems2019 = incomeStatement2019.otherItems
+      netIncome2019 = incomeStatement2019.netIncome
+      netIncomeApplicabletoCommonShares2019 = incomeStatement2019.netIncomeApplicabletoCommonShares
       //------------- Variables +3 year -----------------------------
-      totalRevenue2018 = cashflow2018.totalRevenue
-      costOfRevenue2018 = cashflow2018.costOfRevenue
-      grossProfit2018 = cashflow2018.grossProfit
-      researchDevelopment2018 = cashflow2018.researchDevelopment
-      sellingGeneralAdministrative2018 = cashflow2018.sellingGeneralAdministrative
-      nonRecurring2018 = cashflow2018.nonRecurring
-      otherOperatingExpenses2018 = cashflow2018.otherOperatingExpenses
-      totalOperatingExpenses2018 = cashflow2018.totalOperatingExpenses
-      operatingIncome2018 = cashflow2018.operatingIncome
-      totalOtherIncomeExpenseNet2018 = cashflow2018.totalOtherIncomeExpenseNet
-      ebit2018 = cashflow2018.ebit
-      interestExpense2018 = cashflow2018.interestExpense
-      incomeBeforeTax2018 = cashflow2018.incomeBeforeTax
-      incomeTaxExpense2018 = cashflow2018.incomeTaxExpense
-      minorityInterest2018 = cashflow2018.minorityInterest
-      netIncomeFromContinuingOps2018 = cashflow2018.netIncomeFromContinuingOps
-      discontinuedOperations2018 = cashflow2018.discontinuedOperations
-      extraordinaryItems2018 = cashflow2018.extraordinaryItems
-      effectOfAccountingCharges2018 = cashflow2018.effectOfAccountingCharges
-      otherItems2018 = cashflow2018.otherItems
-      netIncome2018 = cashflow2018.netIncome
-      netIncomeApplicabletoCommonShares2018 = cashflow2018.netIncomeApplicabletoCommonShares
+      totalRevenue2018 = incomeStatement2018.totalRevenue
+      costOfRevenue2018 = incomeStatement2018.costOfRevenue
+      grossProfit2018 = incomeStatement2018.grossProfit
+      researchDevelopment2018 = incomeStatement2018.researchDevelopment
+      sellingGeneralAdministrative2018 = incomeStatement2018.sellingGeneralAdministrative
+      nonRecurring2018 = incomeStatement2018.nonRecurring
+      otherOperatingExpenses2018 = incomeStatement2018.otherOperatingExpenses
+      totalOperatingExpenses2018 = incomeStatement2018.totalOperatingExpenses
+      operatingIncome2018 = incomeStatement2018.operatingIncome
+      totalOtherIncomeExpenseNet2018 = incomeStatement2018.totalOtherIncomeExpenseNet
+      ebit2018 = incomeStatement2018.ebit
+      interestExpense2018 = incomeStatement2018.interestExpense
+      incomeBeforeTax2018 = incomeStatement2018.incomeBeforeTax
+      incomeTaxExpense2018 = incomeStatement2018.incomeTaxExpense
+      minorityInterest2018 = incomeStatement2018.minorityInterest
+      netIncomeFromContinuingOps2018 = incomeStatement2018.netIncomeFromContinuingOps
+      discontinuedOperations2018 = incomeStatement2018.discontinuedOperations
+      extraordinaryItems2018 = incomeStatement2018.extraordinaryItems
+      effectOfAccountingCharges2018 = incomeStatement2018.effectOfAccountingCharges
+      otherItems2018 = incomeStatement2018.otherItems
+      netIncome2018 = incomeStatement2018.netIncome
+      netIncomeApplicabletoCommonShares2018 = incomeStatement2018.netIncomeApplicabletoCommonShares
       
     
      
     
     console.log("------START--------")
-    console.log(incomeStatement2021)
+    console.log()
     console.log("------END--------")
+
+    
     
       }
     
@@ -355,26 +361,24 @@ console.log("------END--------")
 
  
 
-  retrieveBalanceSheet();
-  retrieveCashFlowStatement();
-  retrieveIncomeStatement();
 
 
 
 
 
-app.get('/',(req, res) => {
-    // middleware, because it is happening between request and response
-  res.write('Hello World!')
- 
+//app.get('/',(req, res, next) => {
+//    // middleware, because it is happening between request and response
+//  res.send('Hello World!')
+//  next()
  //res.send 
-   
-   
-   
+//})
 
-
-  
+app.get('/', function (req,res,next){
+  res.json("this is my webscraper")
+  next()
 })
+
+
 
 
 

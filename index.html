@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src> "server.js"</script>
+    <script type = "module" src="index.module.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://kit.fontawesome.com/b25b63590a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -28,124 +28,13 @@
         <input name = "formSub" type="submit">
         <p1 id="submitText">test</p1>
     </form>
-    <div id = "tbls">
-        <div id = "spacer"></div>
-        <div class = "tblTitle">
-        <h3> Balance Statement </h3>
-        </div>
-        <div id = "tableBalanceStatement">
-        <table class="tbl" border="1">
-            <tr>
-                <th> Year </th>
-                <th> Company Name </th>
-                <th> Ticker </th>
-                <th> Cash </th>
-                <th> Net receivables </th>
-                
-            </tr>
-            <tr>
-                <td> 2021 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2020 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2019 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2018 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-        </table>
-        </div>
-        <div id = "spacer"></div>
-        <div class = "tblTitle">
-        <h3> Cashflow Statement </h3>
-        </div>
-        <div id = "cashflowStatement">
-        <table class="tbl" border="1">
-            <tr>
-                <th> Year </th>
-                <th> Company Name </th>
-                <th> Ticker </th>
-                <th> Cash </th>
-                <th> Net receivables </th>
-                
-            </tr>
-            <tr>
-                <td> 2021 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2020 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2019 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2018 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-        </table>
-        </div>
-        <div id = "spacer"></div>
-        <div class = "tblTitle">
-        <h3> Income Statement </h3>
-        </div>
-        <div id = "tableIncomeStatement">
-        <table class="tbl" border="1">
-            <tr>
-                <th> Year </th>
-                <th> Company Name </th>
-                <th> Ticker </th>
-                <th> Cash </th>
-                <th> Net receivables </th>
-                
-            </tr>
-            <tr>
-                <td> 2021 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2020 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2019 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-            <tr> 
-                <td> 2018 </td>
-                <td> Apple </td>
-                <td> AAPL </td>
-            </tr>
-        </table>
-        </div>
-        <div id = "info"> 
+   
+    <h1> ADD THREE JS GRAPHIC HERE </h1>
+    <div id="threeGlobeDiv">
+        <canvas id = "threeGlobe" width="1000" height="700" ></canvas>      
     </div>
-        <p1> information </p1>
-    </div>
-    <div>
-        <p1> </p1>
-    </div>
-
     <div id = "footer"></div>
-    
+
 </body>
+
 </html>

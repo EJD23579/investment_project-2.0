@@ -7,8 +7,10 @@ html{
 body {
     display:flexbox;
     
-    height: 100%;
+    height: auto;
 }
+
+
 
 #pageTitle {
     display: flexbox;
@@ -22,6 +24,20 @@ body {
     margin-right: 1em;
 }
 
+
+.rotate{
+    -moz-transition: all 2s linear;
+    -webkit-transition: all 2s linear;
+    transition: all 2s linear;
+}
+
+.rotate.down{
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
 #formCmd{
     display: flexbox;
     text-align: center; 
@@ -30,6 +46,16 @@ body {
 #formSub{
     display: flexbox;
     text-align: center;  
+}
+
+#threeGlobeDiv{
+    margin-left:auto;
+    margin-right: auto;
+    width: 100%;
+    height:100%;
+}
+#threeGlobe{
+    
 }
 
 table.tbl{
@@ -42,8 +68,17 @@ table.tbl{
     display: flexbox;
     text-align: center;
 }
-   
 
+.bookLogicTitles{
+    display: flexbox;
+    text-align: center;
+}
+   
+.bookLogic{
+    display: flexbox;
+    text-align: left;
+    padding-left: 2em;
+}
 
 
 #info {

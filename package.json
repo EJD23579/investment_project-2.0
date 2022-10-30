@@ -25,6 +25,7 @@
     "express": "^4.18.2",
     "jquery": "^3.6.1",
     "three": "^0.146.0",
+    "three-globe": "^2.24.8",
     "yahoo-finance2": "^2.3.6"
   }
 }

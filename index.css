@@ -2,6 +2,8 @@ html{
     display: flexbox;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
+    color:aliceblue;
+    background-color: black;
 }
 
 body {

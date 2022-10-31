@@ -1,44 +1,9 @@
-//Call to server
-const yahooFinance = require('yahoo-finance2').default
 
 
-(() => {
-    let httpRequest;
-    document.getElementById("ajaxButton")
-    document.addEventListener("click", makeRequest)
 
-        function makeRequest(){
-        httpRequest = new XMLHttpRequest();
-        
-        if(!httpRequest){
-            alert("Giving up:( Cannot create an XMLHTTP instance");
-            return false;
-        }
-        httpRequest.onreadystatechange = alertContents;
-        httpRequest.open("GET","index.html");
-        httpRequest.send();
-    }
-    function alertContents(){
-        if (httpRequest.readyState === XMLHttpRequest.DONE){
-            if(httpRequest.status === 200){
-                alert(httpRequest.responseText);
-            } else {
-                alert("there was a problem with the request")
-            }
-        }
-    }
+document.getElementById("ajaxButton").onclick = function (){
+    location.href = "tables.html"
 }
-)();
-
-
-// html interactivity
-
-$(".fa-solid fa-bars").on("click", function(){
-    $(this).toggleClass("down"); 
-});
-
-
-
 
 
 
@@ -47,10 +12,10 @@ $(".fa-solid fa-bars").on("click", function(){
 
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r99/three.module.js';
 
-import { DirectionalLight } from './node_modules/three/src/lights/DirectionalLight.js';
-import { DirectionalLightShadow } from './node_modules/three/src/lights/DirectionalLightShadow.js';
-import { TextureLoader } from './node_modules/three/src/loaders/TextureLoader.js';
-import { Color } from './node_modules/three/src/math/Color.js';
+import { DirectionalLight } from '../node_modules/three/src/lights/DirectionalLight.js';
+import { DirectionalLightShadow } from '../node_modules/three/src/lights/DirectionalLightShadow.js';
+import { TextureLoader } from '../node_modules/three/src/loaders/TextureLoader.js';
+import { Color } from '../node_modules/three/src/math/Color.js';
 
 
 // -------Resizing renderer on window resize START ----------

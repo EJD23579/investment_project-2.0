@@ -5,6 +5,8 @@ const { json, response } = require('express');
 const express = require('express');
 const { rows } = require('pg/lib/defaults');
 const yahooFinance = require('yahoo-finance2').default
+const cors = require('cors')
+
 
 //------- Requirements END ----------------
 
@@ -13,7 +15,7 @@ let cashflow;
 let incomeStatement;
 const app = express()
 const port = 3000
-
+app.use(cors())
 
 
 // ---------- Retrieving values from API START --------------

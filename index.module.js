@@ -1,4 +1,34 @@
+//Call to server
+const yahooFinance = require('yahoo-finance2').default
 
+
+(() => {
+    let httpRequest;
+    document.getElementById("ajaxButton")
+    document.addEventListener("click", makeRequest)
+
+        function makeRequest(){
+        httpRequest = new XMLHttpRequest();
+        
+        if(!httpRequest){
+            alert("Giving up:( Cannot create an XMLHTTP instance");
+            return false;
+        }
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open("GET","index.html");
+        httpRequest.send();
+    }
+    function alertContents(){
+        if (httpRequest.readyState === XMLHttpRequest.DONE){
+            if(httpRequest.status === 200){
+                alert(httpRequest.responseText);
+            } else {
+                alert("there was a problem with the request")
+            }
+        }
+    }
+}
+)();
 
 
 // html interactivity
@@ -71,7 +101,6 @@ pointLight.position.set(0,10,30);
     let textures = {
         //credits for textures go to https://free3d.com/user/ali_alkendi
         bumpText: new TextureLoader().load("assets/earthbump.jpg"),
-        mapText: new TextureLoader().load("assets/earthmap.jpg"),
         specText: new TextureLoader().load("assets/earthspec.jpg")
 }
 
@@ -88,10 +117,10 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 const geometry = new THREE.SphereGeometry(10,70,70);
 const material = new THREE.MeshPhysicalMaterial({
-    map: textures.mapText,
-    roughnessMap: textures.specText,
-    bumpMap: textures.bumpText,
-    bumpScale: 1,
+    map: textures.specText,
+    //roughnessMap: textures.specText,
+    //bumpMap: textures.bumpText,
+    //bumpScale: 1,
 
     sheen: 1,
     sheenRoughness: 0.1,

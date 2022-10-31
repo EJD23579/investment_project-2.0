@@ -16,8 +16,6 @@ const port = 3000
 
 
 
-
-
 // ---------- Retrieving values from API START --------------
 async function retrieveBalanceSheet(req,res){
   let symbol = 'AAPL';
@@ -135,7 +133,10 @@ console.log("------END--------")
 
   }
 
-  async function retrieveCashFlowStatement(req,res){
+
+
+
+  app.get("/cashflowStatement", async function(req,res,next ){
     let symbol = 'AAPL';
     cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
       
@@ -229,14 +230,23 @@ console.log("------END--------")
     repurchaseOfStock2021 = cashflow2018.repurchaseOfStock
     issuanceOfStock2018 = cashflow2018.issuanceOfStock
     
-  
+    array1 = [netBorrowings2021,depreciation2021,changeToNetIncome2021,changeToAccountReceivables2021,changeToLiabilities2021,changeToInventory2021,
+              changeToOperatingActivities2021,capitalExpenditures2021,investments2021,otherCashflowsFromInvestingActivities2021,dividendsPaid2021,
+              netBorrowings2021,otherCashflowsFromFinancingActivities2021,totalCashFromFinancingActivities2021,changeInCash2021,repurchaseOfStock2021,
+            issuanceOfStock2021]
+
+    res.json(array1)
+     
    
+    
+    
+    
+      
+  })
   
-  console.log("------START--------")
-  
-  console.log("------END--------")
-  
-    }
+
+ 
+   // console.log(cash2021)
 
     async function retrieveIncomeStatement(req,res){
       let symbol = 'AAPL';
@@ -378,6 +388,8 @@ app.get('/', function (req,res,next){
   next()
 })
 
+
+app.use(express.json());
 
 
 

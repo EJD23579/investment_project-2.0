@@ -2,7 +2,7 @@
   "name": "investment_project-2.0",
   "version": "1.0.0",
   "description": "This is a new version of the old investment project on my Github. This version will use JavaScript, and will be deployed as website rather than a console application.",
-  "main": "index.js",
+  "main": "index.module.js",
   "scripts": {
     "test": "jest",
     "dev": "nodemon ./server.js"

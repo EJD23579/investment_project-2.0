@@ -19,7 +19,7 @@ app.use(cors())
 
 
 // ---------- Retrieving values from API START --------------
-async function retrieveBalanceSheet(req,res){
+ app.get("/balanceSheetHistory",async function retrieveBalanceSheet(req,res,next){
   let symbol = 'AAPL';
   balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
   //Storing the annual balance sheet values
@@ -36,7 +36,7 @@ async function retrieveBalanceSheet(req,res){
   shortTermInv2021 = balanceSheet2021.shortTermInvestments
   netRecievables2021 = balanceSheet2021.netReceivables
   inv2021 = balanceSheet2021.inventory
-  otherCurrentAssests2021 = balanceSheet2021.otherCurrentAssets
+  otherCurrentAssets2021 = balanceSheet2021.otherCurrentAssets
   totalCurrentAssets2021 = balanceSheet2021.totalCurrentAssets
   longTermInvestments2021 = balanceSheet2021.longTermInvestments
   propertyPlantEquipment2021 = balanceSheet2021.propertyPlantEquipment
@@ -128,12 +128,12 @@ otherStockholderEquity2018 = balanceSheet2018.otherStockholderEquity
 totalStockholderEquity2018 = balanceSheet2018.totalStockholderEquity
 netTangibleAssets2018 = balanceSheet2018.netTangibleAssets
 
-console.log("------START--------")
-console.log("cash: " + cash2021)
-console.log("short term investments: " + shortTermInv2021)
-console.log("------END--------")
+progressArray = Object.values(balanceSheet2021);
+workableArray = progressArray.splice(0,2)
+res.json(progressArray)
 
   }
+ )
 
 
 
@@ -237,8 +237,9 @@ console.log("------END--------")
               netBorrowings2021,otherCashflowsFromFinancingActivities2021,totalCashFromFinancingActivities2021,changeInCash2021,repurchaseOfStock2021,
             issuanceOfStock2021]
 
-    res.json(array1)
-     
+    progressArray = Object.values(cashflow2021);
+    workableArray = progressArray.splice(0,2)
+    res.json(progressArray)
    
     
     

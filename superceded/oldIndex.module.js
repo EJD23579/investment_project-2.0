@@ -6,14 +6,16 @@ document.getElementById("ajaxButton").onclick = function (){
 }
 
 
+import * as Globe from 'globe.gl/dist/globe.gl.common.js';
+
+
+
+
 
 
 //----------- THREE -------------------
-
+/*
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r99/three.module.js';
-
-import { DirectionalLight } from '../node_modules/three/src/lights/DirectionalLight.js';
-import { DirectionalLightShadow } from '../node_modules/three/src/lights/DirectionalLightShadow.js';
 import { TextureLoader } from '../node_modules/three/src/loaders/TextureLoader.js';
 import { Color } from '../node_modules/three/src/math/Color.js';
 
@@ -116,3 +118,4 @@ function animate(){
 }
 
 animate();
+*/

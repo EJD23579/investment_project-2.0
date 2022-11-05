@@ -2,8 +2,8 @@ html{
     display: flexbox;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    color:aliceblue;
-    background-color: black;
+    color:black;
+    background-color: whitesmoke;
 }
 
 body {
@@ -13,6 +13,7 @@ body {
 }
 
 
+/* ------ Landing page START --------- */
 
 #pageTitle {
     display: flexbox;
@@ -59,11 +60,14 @@ body {
 #threeGlobe{
     
 }
+/* ------ Landing page END --------- */
+/* ------ Table data page START --------- */
 
 table.tbl{
     
     margin-left: auto;
     margin-right: auto;
+    table-layout: fixed;
 }   
 
 .tblTitle{
@@ -71,9 +75,29 @@ table.tbl{
     text-align: center;
 }
 
+/* ------ Table data page END --------- */
+/* ------ Buffett logic page START --------- */
+
+
 .bookLogicTitles{
     display: flexbox;
     text-align: center;
+}
+
+.bookLogicSubTitles{
+    display:flexbox;
+    background-color:lightblue;
+    border-radius: 20px;
+    padding-left: 10px;
+    width:50%;
+
+}   
+
+.bookLogicContent{
+    display:flexbox;
+    background-color:lightgreen;
+    border-radius: 20px;
+    padding-left: 10px;
 }
    
 .bookLogic{
@@ -81,6 +105,7 @@ table.tbl{
     text-align: left;
     padding-left: 2em;
 }
+/* ------ Buffett logic page END --------- */
 
 
 #info {

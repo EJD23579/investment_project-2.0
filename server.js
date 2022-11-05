@@ -1,24 +1,251 @@
 
 //------- Requirements START ----------------
 
-const { json, response } = require('express');
 const express = require('express');
-const { rows } = require('pg/lib/defaults');
 const yahooFinance = require('yahoo-finance2').default
 const cors = require('cors')
-
+var bodyParser = require('body-parser');
 
 //------- Requirements END ----------------
 
 let balanceSheet;
 let cashflow;
 let incomeStatement;
+let symbol;
 const app = express()
 const port = 3000
-app.use(cors())
+app.use(cors());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static('src'));
+app.use(express.json());
 
 
-// ---------- Retrieving values from API START --------------
+
+
+// ------- User input START
+
+
+
+app.post('/', (req,res) =>{
+  const parcel = req.body
+  console.log(parcel)
+  if(!parcel){
+    return res.status(400).send({status: 'failed'})
+  }
+  res.status(200).send({status:'received'})
+})
+
+
+
+
+
+// ------- User input END
+
+
+
+
+
+// -------- Table Data START -----------------
+// ------------ BALANCE SHEET TABLES START --------------
+app.get("/balanceSheetHistory2021", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2021 = Object.values(balanceSheet2021);
+  workableArray2021 = progressArray2021.splice(0,2)
+  res.json(progressArray2021)
+  next();
+})
+
+app.get("/balanceSheetHistory2020", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2020 = Object.values(balanceSheet2020);
+  workableArray2020 = progressArray2020.splice(0,2)
+  res.json(progressArray2020)
+  next();
+})
+
+app.get("/balanceSheetHistory2019", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2019 = Object.values(balanceSheet2019);
+  workableArray2019 = progressArray2019.splice(0,2)
+  res.json(progressArray2019)
+  next();
+})
+
+app.get("/balanceSheetHistory2018", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2018 = Object.values(balanceSheet2018);
+  workableArray2018 = progressArray2018.splice(0,2)
+  res.json(progressArray2018)
+  next();
+})
+// ------------ BALANCE SHEET TABLES END --------------
+// ------------ CASHFLOW TABLES START ----------------
+
+
+app.get("/cashflowStatement2021", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2021 = Object.values(cashflow2021);
+  workableArray2021 = progressArray2021.splice(0,2)
+  res.json(progressArray2021)
+  next();
+})
+
+app.get("/cashflowStatement2020", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2020 = Object.values(cashflow2020);
+  workableArray2020 = progressArray2020.splice(0,2)
+  res.json(progressArray2020)
+  next();
+})
+
+app.get("/cashflowStatement2019", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2019 = Object.values(cashflow2019);
+  workableArray2019 = progressArray2019.splice(0,2)
+  res.json(progressArray2019)
+  next();
+})
+
+app.get("/cashflowStatement2018", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2018 = Object.values(cashflow2018);
+  workableArray2018 = progressArray2018.splice(0,2)
+  res.json(progressArray2018)
+  next();
+})
+
+// ------------ CASHFLOW TABLES END ----------------
+// ------------ INCONE STATEMENT TABLES START
+app.get("/incomeStatement2021", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2021 = Object.values(incomeStatement2021);
+  workableArray2021 = progressArray2021.splice(0,2)
+  res.json(progressArray2021)
+  next();
+})
+
+app.get("/incomeStatement2020", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2020 = Object.values(incomeStatement2020);
+  workableArray2020 = progressArray2020.splice(0,2)
+  res.json(progressArray2020)
+  next();
+})
+
+app.get("/incomeStatement2019", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2019 = Object.values(incomeStatement2019);
+  workableArray2019 = progressArray2019.splice(0,2)
+  res.json(progressArray2019)
+  next();
+})
+
+app.get("/incomeStatement2018", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2018 = Object.values(incomeStatement2018);
+  workableArray2018 = progressArray2018.splice(0,2)
+  res.json(progressArray2018)
+  next();
+})
+// ------------ INCOME STATEMENT TABLES END
+// -------- Table Data END -------------------
+
+
+
+
+
+
+
+
+// ---------- Buffett Logic START --------------
  app.get("/balanceSheetHistory",async function retrieveBalanceSheet(req,res,next){
   let symbol = 'AAPL';
   balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
@@ -27,8 +254,6 @@ app.use(cors())
   balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
   balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
   balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
-
-//Buffett Logic and scoring to be included
 
 
 // -------------- Most recent statement variables ----------------
@@ -128,13 +353,10 @@ otherStockholderEquity2018 = balanceSheet2018.otherStockholderEquity
 totalStockholderEquity2018 = balanceSheet2018.totalStockholderEquity
 netTangibleAssets2018 = balanceSheet2018.netTangibleAssets
 
-progressArray = Object.values(balanceSheet2021);
-workableArray = progressArray.splice(0,2)
-res.json(progressArray)
+
 
   }
  )
-
 
 
 
@@ -148,7 +370,7 @@ res.json(progressArray)
     cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
     cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
   
-    //Buffett Logic and scoring to be included
+
 
 
 // -------------- Most recent statement variables ----------------
@@ -236,20 +458,8 @@ res.json(progressArray)
               changeToOperatingActivities2021,capitalExpenditures2021,investments2021,otherCashflowsFromInvestingActivities2021,dividendsPaid2021,
               netBorrowings2021,otherCashflowsFromFinancingActivities2021,totalCashFromFinancingActivities2021,changeInCash2021,repurchaseOfStock2021,
             issuanceOfStock2021]
-
-    progressArray = Object.values(cashflow2021);
-    workableArray = progressArray.splice(0,2)
-    res.json(progressArray)
-   
-    
-    
-    
-      
   })
   
-
- 
-   // console.log(cash2021)
 
     async function retrieveIncomeStatement(req,res){
       let symbol = 'AAPL';
@@ -260,9 +470,6 @@ res.json(progressArray)
        incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
        incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
        incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
-
-
-      //Buffett Logic and scoring to be included
 
 
   // -------------- Most recent statement variables ----------------
@@ -360,17 +567,12 @@ res.json(progressArray)
       
     
      
-    
-    console.log("------START--------")
-    console.log()
-    console.log("------END--------")
 
-    
     
       }
     
 
-// ---------- Retrieving values from API END --------------
+// ---------- BUFFETT LOGIC END --------------
 
  
 
@@ -379,12 +581,7 @@ res.json(progressArray)
 
 
 
-//app.get('/',(req, res, next) => {
-//    // middleware, because it is happening between request and response
-//  res.send('Hello World!')
-//  next()
- //res.send 
-//})
+
 
 app.get('/', function (req,res,next){
   res.json("this is my webscraper")
@@ -392,7 +589,7 @@ app.get('/', function (req,res,next){
 })
 
 
-app.use(express.json());
+
 
 
 

@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.module.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/b25b63590a.js" crossorigin="anonymous"></script>
+    <script src="//unpkg.com/globe.gl"></script>
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/b25b63590a.js" crossorigin="anonymous"></script>
     <title>Investment Analysis</title>
 </head>
+
 <body>
     <div id = "navBar">
         <i class="fa-solid fa-bars"></i>
@@ -35,29 +38,6 @@
     <div id = "footer"></div>
 
 </body>
-<script>
-    const postBtn = document.getElementById('formSub').document.addEventListener('click',postInfo)
-    const input = document.getElementById('tickerId')
-    
-    const baseUrl = 'http://localhost:3000/'
 
-    
-    
-    async function postInfo(e){
-            e.preventDefault()
-            if(input.value == ''){return}
-            const res = await fetch(baseUrl,
-            
-            {
-                method: 'POST',
-                headers:{
-                    "Content-Type": 'application/json',
-                body: JSON.stringify({
-                    parcel:input.value
-                })
-                }
-            })
-            console.log(res)
-    }
-</script>
+
 </html>

@@ -23,10 +23,9 @@
     <h2 id ="formCmd"> Please type in a ticker for a stock below:</h2>
     <form id="formSub" method="POST" action="/">
         <input id = "tickerId" name = "ticker" type="text">
-        <input name = "formSub" type="submit" value="Submit">
+        <input name = "formSub" type="submit" onclick="location.href = 'financeTables.html'" value="Submit">
         
     </form>
-    <button id="ajaxButton" onclick="location.href = 'financeTables.html'" style="margin-left: 20em"> Click Me </button>
    
     <h1> ADD THREE JS GRAPHIC HERE </h1>
     <div id="threeGlobeDiv">
@@ -53,11 +52,12 @@
                 headers:{
                     "Content-Type": 'application/json',
                 body: JSON.stringify({
-                    parcel:input.value
+                    symbol:input.value
                 })
                 }
             })
             console.log(res)
+            
     }
 </script>
 </html>

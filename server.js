@@ -27,14 +27,17 @@ app.use(express.json());
 
 
 app.post('/', (req,res) =>{
-  const parcel = req.body
-  console.log(parcel)
-  if(!parcel){
+  symbol = req.body
+  console.log(symbol)
+  if(!symbol){
     return res.status(400).send({status: 'failed'})
   }
-  res.status(200).send({status:'received'})
+  res.sendFile('src/financeTables.html', {root: __dirname})
+
+ 
 })
 
+console.log(symbol)
 
 
 
@@ -48,7 +51,7 @@ app.post('/', (req,res) =>{
 // -------- Table Data START -----------------
 // ------------ BALANCE SHEET TABLES START --------------
 app.get("/balanceSheetHistory2021", async function(req,res,next){
-  let symbol = 'AAPL';
+  let symbol = "AAPL";
   balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
 
   balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)

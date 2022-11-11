@@ -1,21 +1,255 @@
 
 //------- Requirements START ----------------
 
-const { json } = require('express');
 const express = require('express');
-const { rows } = require('pg/lib/defaults');
-const app = express()
-const port = 3000
 const yahooFinance = require('yahoo-finance2').default
+const cors = require('cors')
+var bodyParser = require('body-parser');
 
 //------- Requirements END ----------------
 
 let balanceSheet;
 let cashflow;
 let incomeStatement;
+let symbol;
+const app = express()
+const port = 3000
+app.use(cors());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static('src'));
+app.use(express.json());
 
-// ---------- Retrieving values from API START --------------
-async function retrieveBalanceSheet(req,res){
+
+
+
+// ------- User input START
+
+
+
+app.post('/', (req,res) =>{
+  symbol = req.body
+  console.log(symbol)
+  if(!symbol){
+    return res.status(400).send({status: 'failed'})
+  }
+  res.sendFile('src/financeTables.html', {root: __dirname})
+
+ 
+})
+
+console.log(symbol)
+
+
+
+
+// ------- User input END
+
+
+
+
+
+// -------- Table Data START -----------------
+// ------------ BALANCE SHEET TABLES START --------------
+app.get("/balanceSheetHistory2021", async function(req,res,next){
+  let symbol = "AAPL";
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2021 = Object.values(balanceSheet2021);
+  workableArray2021 = progressArray2021.splice(0,2)
+  res.json(progressArray2021)
+  next();
+})
+
+app.get("/balanceSheetHistory2020", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2020 = Object.values(balanceSheet2020);
+  workableArray2020 = progressArray2020.splice(0,2)
+  res.json(progressArray2020)
+  next();
+})
+
+app.get("/balanceSheetHistory2019", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2019 = Object.values(balanceSheet2019);
+  workableArray2019 = progressArray2019.splice(0,2)
+  res.json(progressArray2019)
+  next();
+})
+
+app.get("/balanceSheetHistory2018", async function(req,res,next){
+  let symbol = 'AAPL';
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
+
+  balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
+  balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
+  balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
+  balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
+
+  progressArray2018 = Object.values(balanceSheet2018);
+  workableArray2018 = progressArray2018.splice(0,2)
+  res.json(progressArray2018)
+  next();
+})
+// ------------ BALANCE SHEET TABLES END --------------
+// ------------ CASHFLOW TABLES START ----------------
+
+
+app.get("/cashflowStatement2021", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2021 = Object.values(cashflow2021);
+  workableArray2021 = progressArray2021.splice(0,2)
+  res.json(progressArray2021)
+  next();
+})
+
+app.get("/cashflowStatement2020", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2020 = Object.values(cashflow2020);
+  workableArray2020 = progressArray2020.splice(0,2)
+  res.json(progressArray2020)
+  next();
+})
+
+app.get("/cashflowStatement2019", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2019 = Object.values(cashflow2019);
+  workableArray2019 = progressArray2019.splice(0,2)
+  res.json(progressArray2019)
+  next();
+})
+
+app.get("/cashflowStatement2018", async function(req,res,next){
+  let symbol = 'AAPL';
+  cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
+
+  cashflow2021 = cashflow.cashflowStatementHistory.cashflowStatements.at(0)
+  cashflow2020 = cashflow.cashflowStatementHistory.cashflowStatements.at(1)
+  cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
+  cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
+
+  progressArray2018 = Object.values(cashflow2018);
+  workableArray2018 = progressArray2018.splice(0,2)
+  res.json(progressArray2018)
+  next();
+})
+
+// ------------ CASHFLOW TABLES END ----------------
+// ------------ INCONE STATEMENT TABLES START
+app.get("/incomeStatement2021", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2021 = Object.values(incomeStatement2021);
+  workableArray2021 = progressArray2021.splice(0,2)
+  res.json(progressArray2021)
+  next();
+})
+
+app.get("/incomeStatement2020", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2020 = Object.values(incomeStatement2020);
+  workableArray2020 = progressArray2020.splice(0,2)
+  res.json(progressArray2020)
+  next();
+})
+
+app.get("/incomeStatement2019", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2019 = Object.values(incomeStatement2019);
+  workableArray2019 = progressArray2019.splice(0,2)
+  res.json(progressArray2019)
+  next();
+})
+
+app.get("/incomeStatement2018", async function(req,res,next){
+  let symbol = 'AAPL';
+      incomeStatement = await yahooFinance.quoteSummary(symbol,{modules:["incomeStatementHistory"]});
+        
+      //Storing the annual cashflow statements
+       incomeStatement2021 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(0)
+       incomeStatement2020 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(1)
+       incomeStatement2019 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(2)
+       incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
+
+  progressArray2018 = Object.values(incomeStatement2018);
+  workableArray2018 = progressArray2018.splice(0,2)
+  res.json(progressArray2018)
+  next();
+})
+// ------------ INCOME STATEMENT TABLES END
+// -------- Table Data END -------------------
+
+
+
+
+
+
+
+
+// ---------- Buffett Logic START --------------
+ app.get("/balanceSheetHistory",async function retrieveBalanceSheet(req,res,next){
   let symbol = 'AAPL';
   balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
   //Storing the annual balance sheet values
@@ -24,15 +258,13 @@ async function retrieveBalanceSheet(req,res){
   balanceSheet2019 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(2)
   balanceSheet2018 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(3)
 
-//Buffett Logic and scoring to be included
-
 
 // -------------- Most recent statement variables ----------------
   cash2021 = balanceSheet2021.cash
   shortTermInv2021 = balanceSheet2021.shortTermInvestments
   netRecievables2021 = balanceSheet2021.netReceivables
   inv2021 = balanceSheet2021.inventory
-  otherCurrentAssests2021 = balanceSheet2021.otherCurrentAssets
+  otherCurrentAssets2021 = balanceSheet2021.otherCurrentAssets
   totalCurrentAssets2021 = balanceSheet2021.totalCurrentAssets
   longTermInvestments2021 = balanceSheet2021.longTermInvestments
   propertyPlantEquipment2021 = balanceSheet2021.propertyPlantEquipment
@@ -124,14 +356,14 @@ otherStockholderEquity2018 = balanceSheet2018.otherStockholderEquity
 totalStockholderEquity2018 = balanceSheet2018.totalStockholderEquity
 netTangibleAssets2018 = balanceSheet2018.netTangibleAssets
 
-console.log("------START--------")
-console.log("cash: " + cash2021)
-console.log("short term investments: " + shortTermInv2021)
-console.log("------END--------")
+
 
   }
+ )
 
-  async function retrieveCashFlowStatement(req,res){
+
+
+  app.get("/cashflowStatement", async function(req,res,next ){
     let symbol = 'AAPL';
     cashflow = await yahooFinance.quoteSummary(symbol,{modules:["cashflowStatementHistory"]});
       
@@ -141,7 +373,7 @@ console.log("------END--------")
     cashflow2019 = cashflow.cashflowStatementHistory.cashflowStatements.at(2)
     cashflow2018 = cashflow.cashflowStatementHistory.cashflowStatements.at(3)
   
-    //Buffett Logic and scoring to be included
+
 
 
 // -------------- Most recent statement variables ----------------
@@ -225,14 +457,12 @@ console.log("------END--------")
     repurchaseOfStock2021 = cashflow2018.repurchaseOfStock
     issuanceOfStock2018 = cashflow2018.issuanceOfStock
     
+    array1 = [netBorrowings2021,depreciation2021,changeToNetIncome2021,changeToAccountReceivables2021,changeToLiabilities2021,changeToInventory2021,
+              changeToOperatingActivities2021,capitalExpenditures2021,investments2021,otherCashflowsFromInvestingActivities2021,dividendsPaid2021,
+              netBorrowings2021,otherCashflowsFromFinancingActivities2021,totalCashFromFinancingActivities2021,changeInCash2021,repurchaseOfStock2021,
+            issuanceOfStock2021]
+  })
   
-   
-  
-  console.log("------START--------")
-  
-  console.log("------END--------")
-  
-    }
 
     async function retrieveIncomeStatement(req,res){
       let symbol = 'AAPL';
@@ -245,136 +475,125 @@ console.log("------END--------")
        incomeStatement2018 =  incomeStatement.incomeStatementHistory.incomeStatementHistory.at(3)
 
 
-      //Buffett Logic and scoring to be included
-
-
   // -------------- Most recent statement variables ----------------
-      totalRevenue2021 = cashflow2021.totalRevenue
-      costOfRevenue2021 = cashflow2021.costOfRevenue
-      grossProfit2021 = cashflow2021.grossProfit
-      researchDevelopment2021 = cashflow2021.researchDevelopment
-      sellingGeneralAdministrative2021 = cashflow2021.sellingGeneralAdministrative
-      nonRecurring2021 = cashflow2021.nonRecurring
-      otherOperatingExpenses2021 = cashflow2021.otherOperatingExpenses
-      totalOperatingExpenses2021 = cashflow2021.totalOperatingExpenses
-      operatingIncome2021 = cashflow2021.operatingIncome
-      totalOtherIncomeExpenseNet2021 = cashflow2021.totalOtherIncomeExpenseNet
-      ebit2021 = cashflow2021.ebit
-      interestExpense2021 = cashflow2021.interestExpense
-      incomeBeforeTax2021 = cashflow2021.incomeBeforeTax
-      incomeTaxExpense2021 = cashflow2021.incomeTaxExpense
-      minorityInterest2021 = cashflow2021.minorityInterest
-      netIncomeFromContinuingOps2021 = cashflow2021.netIncomeFromContinuingOps
-      discontinuedOperations2021 = cashflow2021.discontinuedOperations
-      extraordinaryItems2021 = cashflow2021.extraordinaryItems
-      effectOfAccountingCharges2021 = cashflow2021.effectOfAccountingCharges
-      otherItems2021 = cashflow2021.otherItems
-      netIncome2021 = cashflow2021.netIncome
-      netIncomeApplicabletoCommonShares = cashflow2021.netIncomeApplicabletoCommonShares
+      totalRevenue2021 = incomeStatement2021.totalRevenue
+      costOfRevenue2021 = incomeStatement2021.costOfRevenue
+      grossProfit2021 = incomeStatement2021.grossProfit
+      researchDevelopment2021 = incomeStatement2021.researchDevelopment
+      sellingGeneralAdministrative2021 = incomeStatement2021.sellingGeneralAdministrative
+      nonRecurring2021 = incomeStatement2021.nonRecurring
+      otherOperatingExpenses2021 = incomeStatement2021.otherOperatingExpenses
+      totalOperatingExpenses2021 = incomeStatement2021.totalOperatingExpenses
+      operatingIncome2021 = incomeStatement2021.operatingIncome
+      totalOtherIncomeExpenseNet2021 = incomeStatement2021.totalOtherIncomeExpenseNet
+      ebit2021 = incomeStatement2021.ebit
+      interestExpense2021 = incomeStatement2021.interestExpense
+      incomeBeforeTax2021 = incomeStatement2021.incomeBeforeTax
+      incomeTaxExpense2021 = incomeStatement2021.incomeTaxExpense
+      minorityInterest2021 = incomeStatement2021.minorityInterest
+      netIncomeFromContinuingOps2021 = incomeStatement2021.netIncomeFromContinuingOps
+      discontinuedOperations2021 = incomeStatement2021.discontinuedOperations
+      extraordinaryItems2021 = incomeStatement2021.extraordinaryItems
+      effectOfAccountingCharges2021 = incomeStatement2021.effectOfAccountingCharges
+      otherItems2021 = incomeStatement2021.otherItems
+      netIncome2021 = incomeStatement2021.netIncome
+      netIncomeApplicabletoCommonShares = incomeStatement2021.netIncomeApplicabletoCommonShares
       //------------- Variables +1 year -----------------------------
-      totalRevenue2020 = cashflow2020.totalRevenue
-      costOfRevenue2020 = cashflow2020.costOfRevenue
-      grossProfit2020 = cashflow2020.grossProfit
-      researchDevelopment2020 = cashflow2020.researchDevelopment
-      sellingGeneralAdministrative2020 = cashflow2020.sellingGeneralAdministrative
-      nonRecurring2020 = cashflow2020.nonRecurring
-      otherOperatingExpenses2020 = cashflow2020.otherOperatingExpenses
-      totalOperatingExpenses2020 = cashflow2020.totalOperatingExpenses
-      operatingIncome2020 = cashflow2020.operatingIncome
-      totalOtherIncomeExpenseNet2020 = cashflow2020.totalOtherIncomeExpenseNet
-      ebit2020 = cashflow2020.ebit
-      interestExpense2020 = cashflow2020.interestExpense
-      incomeBeforeTax2021 = cashflow2020.incomeBeforeTax
-      incomeTaxExpense2020 = cashflow2020.incomeTaxExpense
-      minorityInterest2020 = cashflow2021.minorityInterest
-      netIncomeFromContinuingOps2020 = cashflow2020.netIncomeFromContinuingOps
-      discontinuedOperations2020 = cashflow2020.discontinuedOperations
-      extraordinaryItems2020 = cashflow2020.extraordinaryItems
-      effectOfAccountingCharges2020 = cashflow2020.effectOfAccountingCharges
-      otherItems2020 = cashflow2020.otherItems
-      netIncome2020 = cashflow2020.netIncome
-      netIncomeApplicabletoCommonShares2020 = cashflow20.netIncomeApplicabletoCommonShares
+      totalRevenue2020 = incomeStatement2020.totalRevenue
+      costOfRevenue2020 = incomeStatement2020.costOfRevenue
+      grossProfit2020 = incomeStatement2020.grossProfit
+      researchDevelopment2020 = incomeStatement2020.researchDevelopment
+      sellingGeneralAdministrative2020 = incomeStatement2020.sellingGeneralAdministrative
+      nonRecurring2020 = incomeStatement2020.nonRecurring
+      otherOperatingExpenses2020 = incomeStatement2020.otherOperatingExpenses
+      totalOperatingExpenses2020 = incomeStatement2020.totalOperatingExpenses
+      operatingIncome2020 = incomeStatement2020.operatingIncome
+      totalOtherIncomeExpenseNet2020 = incomeStatement2020.totalOtherIncomeExpenseNet
+      ebit2020 = incomeStatement2020.ebit
+      interestExpense2020 = incomeStatement2020.interestExpense
+      incomeBeforeTax2021 = incomeStatement2020.incomeBeforeTax
+      incomeTaxExpense2020 = incomeStatement2020.incomeTaxExpense
+      minorityInterest2020 = incomeStatement2021.minorityInterest
+      netIncomeFromContinuingOps2020 = incomeStatement2020.netIncomeFromContinuingOps
+      discontinuedOperations2020 = incomeStatement2020.discontinuedOperations
+      extraordinaryItems2020 = incomeStatement2020.extraordinaryItems
+      effectOfAccountingCharges2020 = incomeStatement2020.effectOfAccountingCharges
+      otherItems2020 = incomeStatement2020.otherItems
+      netIncome2020 = incomeStatement2020.netIncome
+      netIncomeApplicabletoCommonShares2020 = incomeStatement2020.netIncomeApplicabletoCommonShares
       //------------- Variables +2 year -----------------------------
-      totalRevenue2019 = cashflow2019.totalRevenue
-      costOfRevenue2019 = cashflow2019.costOfRevenue
-      grossProfit2019 = cashflow2019.grossProfit
-      researchDevelopment2019 = cashflow2019.researchDevelopment
-      sellingGeneralAdministrative2019 = cashflow2019.sellingGeneralAdministrative
-      nonRecurring2019 = cashflow2019.nonRecurring
-      otherOperatingExpenses2019 = cashflow2019.otherOperatingExpenses
-      totalOperatingExpenses2019 = cashflow2019.totalOperatingExpenses
-      operatingIncome2019 = cashflow2019.operatingIncome
-      totalOtherIncomeExpenseNet2019 = cashflow2019.totalOtherIncomeExpenseNet
-      ebit2019 = cashflow2019.ebit
-      interestExpense2019 = cashflow2019.interestExpense
-      incomeBeforeTax2019 = cashflow2019.incomeBeforeTax
-      incomeTaxExpense2019 = cashflow2019.incomeTaxExpense
-      minorityInterest2019 = cashflow2019.minorityInterest
-      netIncomeFromContinuingOps2019 = cashflow2019.netIncomeFromContinuingOps
-      discontinuedOperations2019 = cashflow2019.discontinuedOperations
-      extraordinaryItems2019 = cashflow2019.extraordinaryItems
-      effectOfAccountingCharges2019 = cashflow2019.effectOfAccountingCharges
-      otherItems2019 = cashflow2019.otherItems
-      netIncome2019 = cashflow2019.netIncome
-      netIncomeApplicabletoCommonShares2019 = cashflow2019.netIncomeApplicabletoCommonShares
+      totalRevenue2019 = incomeStatement2019.totalRevenue
+      costOfRevenue2019 = incomeStatement2019.costOfRevenue
+      grossProfit2019 = incomeStatement2019.grossProfit
+      researchDevelopment2019 = incomeStatement2019.researchDevelopment
+      sellingGeneralAdministrative2019 = incomeStatement2019.sellingGeneralAdministrative
+      nonRecurring2019 = incomeStatement2019.nonRecurring
+      otherOperatingExpenses2019 = incomeStatement2019.otherOperatingExpenses
+      totalOperatingExpenses2019 = incomeStatement2019.totalOperatingExpenses
+      operatingIncome2019 = incomeStatement2019.operatingIncome
+      totalOtherIncomeExpenseNet2019 = incomeStatement2019.totalOtherIncomeExpenseNet
+      ebit2019 = incomeStatement2019.ebit
+      interestExpense2019 = incomeStatement2019.interestExpense
+      incomeBeforeTax2019 = incomeStatement2019.incomeBeforeTax
+      incomeTaxExpense2019 = incomeStatement2019.incomeTaxExpense
+      minorityInterest2019 = incomeStatement2019.minorityInterest
+      netIncomeFromContinuingOps2019 = incomeStatement2019.netIncomeFromContinuingOps
+      discontinuedOperations2019 = incomeStatement2019.discontinuedOperations
+      extraordinaryItems2019 = incomeStatement2019.extraordinaryItems
+      effectOfAccountingCharges2019 = incomeStatement2019.effectOfAccountingCharges
+      otherItems2019 = incomeStatement2019.otherItems
+      netIncome2019 = incomeStatement2019.netIncome
+      netIncomeApplicabletoCommonShares2019 = incomeStatement2019.netIncomeApplicabletoCommonShares
       //------------- Variables +3 year -----------------------------
-      totalRevenue2018 = cashflow2018.totalRevenue
-      costOfRevenue2018 = cashflow2018.costOfRevenue
-      grossProfit2018 = cashflow2018.grossProfit
-      researchDevelopment2018 = cashflow2018.researchDevelopment
-      sellingGeneralAdministrative2018 = cashflow2018.sellingGeneralAdministrative
-      nonRecurring2018 = cashflow2018.nonRecurring
-      otherOperatingExpenses2018 = cashflow2018.otherOperatingExpenses
-      totalOperatingExpenses2018 = cashflow2018.totalOperatingExpenses
-      operatingIncome2018 = cashflow2018.operatingIncome
-      totalOtherIncomeExpenseNet2018 = cashflow2018.totalOtherIncomeExpenseNet
-      ebit2018 = cashflow2018.ebit
-      interestExpense2018 = cashflow2018.interestExpense
-      incomeBeforeTax2018 = cashflow2018.incomeBeforeTax
-      incomeTaxExpense2018 = cashflow2018.incomeTaxExpense
-      minorityInterest2018 = cashflow2018.minorityInterest
-      netIncomeFromContinuingOps2018 = cashflow2018.netIncomeFromContinuingOps
-      discontinuedOperations2018 = cashflow2018.discontinuedOperations
-      extraordinaryItems2018 = cashflow2018.extraordinaryItems
-      effectOfAccountingCharges2018 = cashflow2018.effectOfAccountingCharges
-      otherItems2018 = cashflow2018.otherItems
-      netIncome2018 = cashflow2018.netIncome
-      netIncomeApplicabletoCommonShares2018 = cashflow2018.netIncomeApplicabletoCommonShares
+      totalRevenue2018 = incomeStatement2018.totalRevenue
+      costOfRevenue2018 = incomeStatement2018.costOfRevenue
+      grossProfit2018 = incomeStatement2018.grossProfit
+      researchDevelopment2018 = incomeStatement2018.researchDevelopment
+      sellingGeneralAdministrative2018 = incomeStatement2018.sellingGeneralAdministrative
+      nonRecurring2018 = incomeStatement2018.nonRecurring
+      otherOperatingExpenses2018 = incomeStatement2018.otherOperatingExpenses
+      totalOperatingExpenses2018 = incomeStatement2018.totalOperatingExpenses
+      operatingIncome2018 = incomeStatement2018.operatingIncome
+      totalOtherIncomeExpenseNet2018 = incomeStatement2018.totalOtherIncomeExpenseNet
+      ebit2018 = incomeStatement2018.ebit
+      interestExpense2018 = incomeStatement2018.interestExpense
+      incomeBeforeTax2018 = incomeStatement2018.incomeBeforeTax
+      incomeTaxExpense2018 = incomeStatement2018.incomeTaxExpense
+      minorityInterest2018 = incomeStatement2018.minorityInterest
+      netIncomeFromContinuingOps2018 = incomeStatement2018.netIncomeFromContinuingOps
+      discontinuedOperations2018 = incomeStatement2018.discontinuedOperations
+      extraordinaryItems2018 = incomeStatement2018.extraordinaryItems
+      effectOfAccountingCharges2018 = incomeStatement2018.effectOfAccountingCharges
+      otherItems2018 = incomeStatement2018.otherItems
+      netIncome2018 = incomeStatement2018.netIncome
+      netIncomeApplicabletoCommonShares2018 = incomeStatement2018.netIncomeApplicabletoCommonShares
       
     
      
-    
-    console.log("------START--------")
-    console.log(incomeStatement2021)
-    console.log("------END--------")
+
     
       }
     
 
-// ---------- Retrieving values from API END --------------
+// ---------- BUFFETT LOGIC END --------------
 
  
 
-  retrieveBalanceSheet();
-  retrieveCashFlowStatement();
-  retrieveIncomeStatement();
 
 
 
 
 
-app.get('/',(req, res) => {
-    // middleware, because it is happening between request and response
-  res.write('Hello World!')
- 
- //res.send 
-   
-   
-   
 
 
-  
+app.get('/', function (req,res,next){
+  res.json("this is my webscraper")
+  next()
 })
+
+
+
+
 
 
 

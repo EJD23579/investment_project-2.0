@@ -1,0 +1,123 @@
+html{
+    display: flexbox;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    color:black;
+    background-color: whitesmoke;
+}
+
+body {
+    display:flexbox;
+    
+    height: auto;
+}
+
+
+/* ------ Landing page START --------- */
+
+#pageTitle {
+    display: flexbox;
+    text-align: center;
+    
+}
+
+#navBar{
+    display: flexbox;
+    text-align: end;
+    margin-right: 1em;
+}
+
+
+.rotate{
+    -moz-transition: all 2s linear;
+    -webkit-transition: all 2s linear;
+    transition: all 2s linear;
+}
+
+.rotate.down{
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+#formCmd{
+    display: flexbox;
+    text-align: center; 
+}
+
+#formSub{
+    display: flexbox;
+    text-align: center;  
+}
+
+#threeGlobeDiv{
+    margin-left:auto;
+    margin-right: auto;
+    width: 100%;
+    height:100%;
+}
+#threeGlobe{
+    
+}
+/* ------ Landing page END --------- */
+/* ------ Table data page START --------- */
+
+table.tbl{
+    
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}   
+
+.tblTitle{
+    display: flexbox;
+    text-align: center;
+}
+
+/* ------ Table data page END --------- */
+/* ------ Buffett logic page START --------- */
+
+
+.bookLogicTitles{
+    display: flexbox;
+    text-align: center;
+}
+
+.bookLogicSubTitles{
+    display:flexbox;
+    background-color:lightblue;
+    border-radius: 20px;
+    padding-left: 10px;
+    width:50%;
+
+}   
+
+.bookLogicContent{
+    display:flexbox;
+    background-color:lightgreen;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+   
+.bookLogic{
+    display: flexbox;
+    text-align: left;
+    padding-left: 2em;
+}
+/* ------ Buffett logic page END --------- */
+
+
+#info {
+    display: flexbox;
+    text-align: center; 
+}
+
+#footer {
+    display: flexbox;
+    background-color: cornflowerblue;
+    justify-content: flex-end;
+    height:2em;
+}
+
+

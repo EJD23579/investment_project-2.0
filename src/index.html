@@ -21,9 +21,9 @@
     <h1 id="pageTitle"> Investment Analysis </h1>
 
     <h2 id ="formCmd"> Please type in a ticker for a stock below:</h2>
-    <form id="formSub" method="POST" action="/">
+    <form id="formSub" method="POST" action="/results/">
         <input id = "tickerId" name = "ticker" type="text">
-        <input name = "formSub" type="submit" onclick="location.href = 'financeTables.html'" value="Submit">
+        <input name = "formSub" type="submit"  value="Submit">
         
     </form>
    
@@ -56,7 +56,6 @@
                 })
                 }
             })
-            console.log(res)
             
     }
 </script>

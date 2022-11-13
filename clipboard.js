@@ -5,7 +5,6 @@ const express = require('express');
 const yahooFinance = require('yahoo-finance2').default
 const cors = require('cors')
 var bodyParser = require('body-parser');
-const { response } = require('express');
 
 //------- Requirements END ----------------
 
@@ -13,7 +12,6 @@ let balanceSheet;
 let cashflow;
 let incomeStatement;
 let symbol;
-let ticker;
 const app = express()
 const port = 3000
 app.use(cors());
@@ -23,34 +21,26 @@ app.use(express.json());
 
 
 
+
 // ------- User input START
 
 
 
-app.post('/results/', (req,res,next) =>{
+app.post('/', (req,res,next) =>{
   symbol = req.body
-  arraySymbol = Object.values(symbol)
-  ticker = arraySymbol[0];
-  console.log(ticker)
-  console.log(typeof ticker)
   console.log(symbol)
   if(!symbol){
     return res.status(400).send({status: 'failed'})}
-  searchTicker(ticker)
 
-    res.sendFile('src/financeTables.html', {root: __dirname})
-    
+
+    res.sendFile('src/submitResult.html', {root: __dirname})
   }
 )
 
 
-async function searchTicker(ticker) {
-  let results = await yahooFinance.quoteSummary(ticker,{modules:["balanceSheetHistory"]})
-  let results2021 = results.balanceSheetHistory.balanceSheetStatements.at(0);
-  console.log(results2021)
-  }
 
-
+  
+ 
 
 // ------- User input END
 
@@ -60,11 +50,12 @@ async function searchTicker(ticker) {
 
 // -------- Table Data START -----------------
 // ------------ BALANCE SHEET TABLES START --------------
-app.get("/balanceSheetHistory2021", async function(ticker){
+app.get("/balanceSheetHistory2021", async function(symbol,res){
 
+ 
 
   
-  balanceSheet = await yahooFinance.quoteSummary(ticker,{modules:["balanceSheetHistory"]});
+  balanceSheet = await yahooFinance.quoteSummary(symbol,{modules:["balanceSheetHistory"]});
 
   balanceSheet2021 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(0)
   balanceSheet2020 = balanceSheet.balanceSheetHistory.balanceSheetStatements.at(1)
@@ -74,7 +65,7 @@ app.get("/balanceSheetHistory2021", async function(ticker){
   progressArray2021 = Object.values(balanceSheet2021);
   workableArray2021 = progressArray2021.splice(0,2)
   res.json(progressArray2021)
-  next()
+  next();
 })
 
 app.get("/balanceSheetHistory2020", async function(req,res,next){
